@@ -18,13 +18,20 @@ env:
 jobs:
   tests:
     name: Tests CI
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
-        rust: [ stable ]
-        # For reference: https://github.com/actions/virtual-environments#available-environments
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        include:
+          - rust: stable
+            os: ubuntu-latest
+            runner: monkci-ubuntu-24.04-32
+          - rust: stable
+            os: windows-latest
+            runner: windows-latest
+          - rust: stable
+            os: macos-latest
+            runner: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
@@ -52,7 +59,7 @@ jobs:
 
   wasm:
     name: Wasm CI
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-32
     strategy:
       fail-fast: false
       matrix:
@@ -74,7 +81,7 @@ jobs:
 
   format:
     name: Rustfmt CI
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-32
     steps:
       - uses: actions/checkout@v4
       # Use rust-toolchain because GHA tends to still have an old version for a few days after a new Rust release.
@@ -86,7 +93,7 @@ jobs:
 
   clippy:
     name: Clippy CI
-    runs-on: ubuntu-latest
+    runs-on: monkci-ubuntu-24.04-32
     steps:
       - uses: actions/checkout@v4
       # Use rust-toolchain because GHA tends to still have an old version for a few days after a new Rust release.
