@@ -25,7 +25,7 @@ jobs:
         include:
           - rust: stable
             os: ubuntu-latest
-            runner: monkci-ubuntu-24.04-32
+            runner: monkci-ubuntu-24.04-16
           - rust: stable
             os: windows-latest
             runner: windows-latest
@@ -59,7 +59,7 @@ jobs:
 
   wasm:
     name: Wasm CI
-    runs-on: monkci-ubuntu-24.04-32
+    runs-on: monkci-ubuntu-24.04-16
     strategy:
       fail-fast: false
       matrix:
@@ -81,7 +81,7 @@ jobs:
 
   format:
     name: Rustfmt CI
-    runs-on: monkci-ubuntu-24.04-32
+    runs-on: monkci-ubuntu-24.04-16
     steps:
       - uses: actions/checkout@v4
       # Use rust-toolchain because GHA tends to still have an old version for a few days after a new Rust release.
@@ -93,7 +93,7 @@ jobs:
 
   clippy:
     name: Clippy CI
-    runs-on: monkci-ubuntu-24.04-32
+    runs-on: monkci-ubuntu-24.04-16
     steps:
       - uses: actions/checkout@v4
       # Use rust-toolchain because GHA tends to still have an old version for a few days after a new Rust release.
